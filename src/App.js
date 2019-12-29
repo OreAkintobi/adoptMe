@@ -1,12 +1,14 @@
-import React from "react";
-import { render } from "react-dom";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import { Router, Link } from "@reach/router";
-import SearchParams from "./SearchParams";
 import Details from "./Details";
+import SearchParams from "./SearchParams";
+import ThemeContext from "./ThemeContext";
 
 const App = () => {
+  const theme = useState("darkblue");
   return (
-    <React.StrictMode>
+    <ThemeContext.Provider value={theme}>
       <div>
         <header>
           <Link to="/">Adopt Me!</Link>
@@ -16,8 +18,8 @@ const App = () => {
           <Details path="/details/:id" />
         </Router>
       </div>
-    </React.StrictMode>
+    </ThemeContext.Provider>
   );
 };
 
-render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
